@@ -1,0 +1,47 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Listado de Medidores
+{% endblock %}
+
+{% block content %}
+<h3>Número de medidores {{ nroMedidores }}</h3>
+
+<table id="tabla_datos">
+  <thead>
+    <tr>
+      <th>Marca</th>
+      <th>Costo del Medidor</th>
+      <th>Origen</th>
+      <th>Cliente</th>
+      <th>Direccion </th>
+      <th>Parroquia </th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+
+  {% for e in medidores %}
+  <tr>
+    <td> {{e.marca}}</td>
+    <td> {{e.costoMedidor}}</td>
+    <td> {{e.origen}}</td>
+    <td> {{e.cliente}}</td>
+    <td> {{e.direccion}}</td>
+    <td> {{e.parroquia}}</td>
+    <td>
+      <a href="{% url 'editarMedidor' e.id %}">editar</a> <br>
+      <a href="{% url 'eliminarMedidor' e.id %}"
+      onclick="return confirm('¿Está seguro de la eliminación?')" >
+      eliminar</a>
+    </td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+<script type="text/javascript">
+  $(document).ready( function () {
+    $('#tabla_datos').DataTable();
+  });
+</script>
+{% endblock %}
